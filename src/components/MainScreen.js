@@ -3,6 +3,7 @@ import logo from "../assets/img/logo.png"
 import Flashcards from "./Flashcards";
 import FlashcardsCompleteds from "./FlashcardsCompleteds";
 
+
 export default function MainScreen(){
     const cards = [
         { question: "O que é JSX?", answer: "Uma extensão da linguagem JavaScript" },
@@ -14,7 +15,7 @@ export default function MainScreen(){
         { question: "Usamos props para __", answer: "Passar diferentes informações para componentes" },
         { question: "Usamos estado (state) para __", answer: "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente" }
     ]
-
+    
     return (
         <ScreenContainer>
 
