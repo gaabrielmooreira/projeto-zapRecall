@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export default function FlashcardsCompleteds({tamanhoCards}) {
+export default function FlashcardsCompleteds({tamanhoCards, numCardsAnswereds}) {
     return (
-        <FooterContainer>
-            <p>0/{tamanhoCards} CONCLUÍDOS</p>
+        <FooterContainer data-test="footer">
+            <p>{numCardsAnswereds}/{tamanhoCards} CONCLUÍDOS</p>
         </FooterContainer>
     )
 }

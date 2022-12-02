@@ -1,10 +1,19 @@
 import styled from "styled-components";
 import Flashcard from "./Flashcard";
 
-export default function Flashcards({cards}) {
+export default function Flashcards({cards,addNumCardsAnswereds}) {
     return (
         <FlashcardList>
-            {cards.map((c, index) => <Flashcard key={c.question} indexQuestion={index + 1} question={c.question} answer={c.answer}/>)}
+            {
+                cards.map((c, index) => 
+                <Flashcard 
+                    key={c.question} 
+                    indexQuestion={index + 1} 
+                    question={c.question} 
+                    answer={c.answer}
+                    addNumCardsAnswereds={addNumCardsAnswereds}
+                />)
+            }
         </FlashcardList>
     )
 }

@@ -7,7 +7,7 @@ import icone_erro from "../assets/img/icone_erro.png";
 import { useState } from "react";
 
 export default function Flashcard(props) {
-    const { indexQuestion, question, answer } = props;
+    const { indexQuestion, question, answer, addNumCardsAnswereds } = props;
 
     const [colorText, setColorText] = useState("#333333");
     const [introVisible,setIntroVisible] = useState(true);
@@ -42,33 +42,35 @@ export default function Flashcard(props) {
         setAnswerVisible(false);
         changeColorText(color);
         showIntro();
+        addNumCardsAnswereds();
         if (status === "Lembrou") changeImgClosedFlashcard(icone_certo);
         if (status === "QuaseLembrou") changeImgClosedFlashcard(icone_quase);
         if (status === "NaoLembrou") changeImgClosedFlashcard(icone_erro);
     }
 
     return (
-        <div>
+        <div data-test="flashcard">
             <StyledClosedFlashcard introVisible={introVisible} colorText={colorText} isFlashCardFinish={isFlashCardFinish}>
-                <p>Pergunta {indexQuestion}</p>
-                <button onClick={showQuestion} disabled={isFlashCardFinish}>
-                    <img src={imgClosedFlashcard} alt="status"></img>
+                <p data-test="flashcard-text">Pergunta {indexQuestion}</p>
+                <button data-test="play-btn" onClick={showQuestion} disabled={isFlashCardFinish}>
+                    <img data-test="no-icon" src={imgClosedFlashcard} alt="status"></img>
                 </button>
             </StyledClosedFlashcard>
 
             <StyledOpenFlashcardQuestion questionVisible={questionVisible}>
-                <p>{question}</p>
+                <p data-test="flashcard-text">{question}</p>
                 <StyledButtonRotate onClick={showAnswer}>
                     <img src={seta_virar} alt="Ver Resposta" />
                 </StyledButtonRotate>
             </StyledOpenFlashcardQuestion>
         
             <StyledOpenFlashcardAnswer answerVisible={answerVisible}>
-                {answer}
+                <p data-test="flashcard-text">{answer}</p>
 
                 <StyledFooterFlashcard>
 
-                    <StyledButtonUserStatus
+                    <StyledButtonUserStatus  
+                        data-test="no-btn" 
                         onClick={() => flashcardFinish("NaoLembrou", "#FF3030")}
                         colorButton="#FF3030"
                     >
@@ -76,6 +78,7 @@ export default function Flashcard(props) {
                     </StyledButtonUserStatus>
 
                     <StyledButtonUserStatus
+                         data-test="partial-btn" 
                         onClick={() => flashcardFinish("QuaseLembrou", "#FF922E")}
                         colorButton="#FF922E"
                     >
@@ -83,6 +86,7 @@ export default function Flashcard(props) {
                     </StyledButtonUserStatus>
 
                     <StyledButtonUserStatus
+                        data-test="zap-btn"
                         onClick={() => flashcardFinish("Lembrou", "#2FBE34")}
                         colorButton="#2FBE34"
                     >
