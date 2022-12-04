@@ -15,6 +15,8 @@ export default function Flashcard(props) {
     const [answerVisible, setAnswerVisible] = useState(false);
     const [imgClosedFlashcard, setImgClosedFlashcard] = useState(seta_play);
     const [isFlashCardFinish, setIsFlashCardFinish] = useState(false);
+    
+    let dataTestIcon = "";
 
     const hideIntro = () => setIntroVisible(false);
     const showIntro = () => setIntroVisible(true);
@@ -43,9 +45,18 @@ export default function Flashcard(props) {
         changeColorText(color);
         showIntro();
         addNumCardsAnswereds();
-        if (status === "Lembrou") changeImgClosedFlashcard(icone_certo);
-        if (status === "QuaseLembrou") changeImgClosedFlashcard(icone_quase);
-        if (status === "NaoLembrou") changeImgClosedFlashcard(icone_erro);
+        if (status === "Lembrou") {
+            dataTestIcon = "zap-icon";
+            changeImgClosedFlashcard(icone_certo);
+        }
+        if (status === "QuaseLembrou"){
+            dataTestIcon = "partial-icon"
+            changeImgClosedFlashcard(icone_quase);
+        }
+        if (status === "NaoLembrou"){
+            dataTestIcon = "no-icon"
+            changeImgClosedFlashcard(icone_erro);
+        }
     }
 
     return (
@@ -53,7 +64,7 @@ export default function Flashcard(props) {
             <StyledClosedFlashcard introVisible={introVisible} colorText={colorText} isFlashCardFinish={isFlashCardFinish}>
                 <p data-test="flashcard-text">Pergunta {indexQuestion}</p>
                 <button data-test="play-btn" onClick={showQuestion} disabled={isFlashCardFinish}>
-                    <img data-test="no-icon" src={imgClosedFlashcard} alt="status"></img>
+                    <img data-test={dataTestIcon} src={imgClosedFlashcard} alt="status"></img>
                 </button>
             </StyledClosedFlashcard>
 
