@@ -71,7 +71,7 @@ export default function Flashcard(props) {
             <StyledOpenFlashcardQuestion questionVisible={questionVisible}>
                 <p data-test="flashcard-text">{question}</p>
                 <StyledButtonRotate onClick={showAnswer}>
-                    <img src={seta_virar} alt="Ver Resposta" />
+                    <img data-test="turn-btn" src={seta_virar} alt="Ver Resposta" />
                 </StyledButtonRotate>
             </StyledOpenFlashcardQuestion>
         
