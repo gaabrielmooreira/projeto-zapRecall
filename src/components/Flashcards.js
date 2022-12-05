@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Flashcard from "./Flashcard";
 
-export default function Flashcards({cards,addNumCardsAnswereds}) {
+export default function Flashcards({cards,addNumCardsAnswereds,iconList,setIconList}) {
     return (
         <FlashcardList>
             {
@@ -12,6 +12,8 @@ export default function Flashcards({cards,addNumCardsAnswereds}) {
                     question={c.question} 
                     answer={c.answer}
                     addNumCardsAnswereds={addNumCardsAnswereds}
+                    iconList={iconList} 
+                    setIconList={setIconList}
                 />)
             }
         </FlashcardList>
@@ -24,5 +26,4 @@ const FlashcardList = styled.div`
   width: 80%;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
 `

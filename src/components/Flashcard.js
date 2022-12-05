@@ -7,7 +7,7 @@ import icone_erro from "../assets/img/icone_erro.png";
 import { useState } from "react";
 
 export default function Flashcard(props) {
-    const { indexQuestion, question, answer, addNumCardsAnswereds } = props;
+    const { indexQuestion, question, answer, addNumCardsAnswereds, iconList, setIconList } = props;
 
     const [colorText, setColorText] = useState("#333333");
     const [introVisible,setIntroVisible] = useState(true);
@@ -43,9 +43,21 @@ export default function Flashcard(props) {
         changeColorText(color);
         showIntro();
         addNumCardsAnswereds();
-        if (status === "Lembrou") changeImgClosedFlashcard(icone_certo);
-        if (status === "QuaseLembrou") changeImgClosedFlashcard(icone_quase);
-        if (status === "NaoLembrou") changeImgClosedFlashcard(icone_erro);
+        if (status === "Lembrou") {
+            changeImgClosedFlashcard(icone_certo);
+            const newIconList = [...iconList, "icone_certo"];
+            setIconList(newIconList);
+        }
+        if (status === "QuaseLembrou") {
+            changeImgClosedFlashcard(icone_quase);
+            const newIconList = [...iconList, "icone_quase"];
+            setIconList(newIconList);
+        }
+        if (status === "NaoLembrou") {
+            changeImgClosedFlashcard(icone_erro);
+            const newIconList = [...iconList, "icone_erro"];
+            setIconList(newIconList);
+        }
     }
 
     return (
@@ -53,7 +65,7 @@ export default function Flashcard(props) {
             <StyledClosedFlashcard introVisible={introVisible} colorText={colorText} isFlashCardFinish={isFlashCardFinish} imgClosedFlashcard={imgClosedFlashcard}>
                 <p data-test="flashcard-text">Pergunta {indexQuestion}</p>
                 <button data-test="play-btn" onClick={showQuestion} disabled={isFlashCardFinish}>
-                    <img data-test="no-icon" src={imgClosedFlashcard} alt="status" />
+                    <img src={seta_play} alt="status" />
                 </button>
 
                 <NoIcon imgClosedFlashcard={imgClosedFlashcard}>
@@ -107,7 +119,6 @@ export default function Flashcard(props) {
                 </StyledFooterFlashcard>
 
             </StyledOpenFlashcardAnswer>
-        
         </div>
     )
 }

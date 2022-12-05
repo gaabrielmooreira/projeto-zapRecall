@@ -5,35 +5,36 @@ import FlashcardsCompleteds from "./FlashcardsCompleteds";
 import { useState } from "react";
 import cards from "../card";
 
-export default function MainScreen(){
+export default function MainScreen({initialScreenDisable}){
     const [numCardsAnswereds,setNumCardsAnswereds] = useState(0);
+    const [iconList,setIconList] = useState([]);
     
     function addNumCardsAnswereds(){
       setNumCardsAnswereds(numCardsAnswereds + 1);
     }
-    
-    return (
-        <ScreenContainer>
 
+    return (
+        <ScreenContainer initialScreenDisable={initialScreenDisable}>
             <LogoContainer>
                 <img src={logo} alt="logo" />
                 <h1>ZapRecall</h1>
             </LogoContainer>
 
-            <Flashcards cards={cards} addNumCardsAnswereds={addNumCardsAnswereds}/>
+            <Flashcards cards={cards} addNumCardsAnswereds={addNumCardsAnswereds} iconList={iconList} setIconList={setIconList}/>
 
-            <FlashcardsCompleteds tamanhoCards={cards.length} numCardsAnswereds={numCardsAnswereds}></FlashcardsCompleteds>
+            <FlashcardsCompleteds numCardsAnswereds={numCardsAnswereds} tamCards={cards.length} iconList={iconList} />
         </ScreenContainer>
     )
 }
 
 const ScreenContainer = styled.div`
+  display: ${props => props.initialScreenDisable ? "flex":"none"};
+  flex-direction: column;
+  align-items: center;
+
   background-color: #FB6B6B;
   width: 100vw;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0px;
   padding: 0px;
   padding-bottom: 200px;
@@ -56,4 +57,5 @@ const LogoContainer = styled.header`
     margin-left: 20px;
   }
 `
+
 
